@@ -6,7 +6,7 @@ const url='https://api.openweathermap.org/data/2.5/weather?appid=02caa31faf5a3d5
 
 function getCurrentWeatherByCityId(cityId,callback){
     request({
-        url: 'https://api.openweathermap.org/data/2.5/weather?id='+cityId+'&appid=02caa31faf5a3d582a3f1145715b7d5f',
+        url: url+'&id='+cityId,
         json: true
     }, function(error, response, body){
 

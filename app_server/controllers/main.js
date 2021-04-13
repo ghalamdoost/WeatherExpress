@@ -7,16 +7,13 @@ const index = function(req, res){
 
 
 const stest= function(req,res){
-    let result;
     fetch.getCurrentWeatherByCityId(2172797,function(err, body) {
         if (err) {
             console.log(err);
         } else {
-            result=body;
-            console.log(result);
+            console.log(body);
         }
     });
-    var ss=0;
 }
 
 
