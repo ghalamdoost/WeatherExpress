@@ -1,4 +1,4 @@
-var fetch = require('./fetch');
+var weatherAPI = require('../services/waetherAPI');
 
 /* Get home page */
 const index = function(req, res){
@@ -7,7 +7,7 @@ const index = function(req, res){
 
 
 const stest= function(req,res){
-    fetch.getCurrentWeatherByCityId(2172797,function(err, body) {
+    weatherAPI.getCurrentWeatherByCityId(2172797,function(err, body) {
         if (err) {
             console.log(err);
         } else {

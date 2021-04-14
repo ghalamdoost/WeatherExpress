@@ -5,11 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 require('./app_server/models/db');
-
-
+require('./app_cron/cronSchedule');
+//Route to the weather app_server
 const indexRouter = require('./app_server/routes/index');
-//Route to the weather api
-var apiRouter = require('./app_api/routes/main');
+//Route to the weather app_api
+var apiRouter = require('./app_api/routes/index');
 
 var app = express();
 

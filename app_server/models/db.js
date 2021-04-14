@@ -47,3 +47,4 @@ process.on('SIGTERM', ()=>{
 });
 
 require('./weather');
+require('./city');

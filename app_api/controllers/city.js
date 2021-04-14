@@ -121,9 +121,9 @@ const deleteCity = function(req,res){
 
 
 module.exports = {
-    getCity,
-    createCity,
-    getSingleCity,
-    updateCity,
-    deleteCity
+    // getCity,
+    // createCity,
+    // getSingleCity,
+    // updateCity,
+    // deleteCity
 }
