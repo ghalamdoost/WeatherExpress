@@ -1,4 +1,4 @@
-const weatherAPI = require('../app_server/services/waetherAPI');
+const waetherProvider = require('../app_server/services/waetherProvider');
 const weather = require('../app_server/controllers/weather')
 
 let obj;
@@ -6,7 +6,7 @@ let obj;
 
 function syncWeather(){
     
-    weatherAPI.getCurrentWeatherByName("Cairns",function(err, body) {
+    waetherProvider.getCurrentWeatherByName("Cairns",function(err, body) {
         if (err) {
             console.log(err);
         } else {

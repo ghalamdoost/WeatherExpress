@@ -70,6 +70,7 @@ const getCurrentWeatherByLatLon=function(wlat,wlon,res){
 }
 
 const getCurrentWeatherByName=function(wname,res){
+    //check if there is any city stored in the database with the same id and name; if not, add it, if it was added, simply bypass.
     Wea.find({name:wname})
         .exec((err,weather)=>{
             if(!weather){

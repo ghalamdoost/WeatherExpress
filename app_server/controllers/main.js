@@ -1,4 +1,4 @@
-var weatherAPI = require('../services/waetherAPI');
+var waetherProvider = require('../services/waetherProvider');
 
 /* Get home page */
 const index = function(req, res){
@@ -7,7 +7,7 @@ const index = function(req, res){
 
 
 const stest= function(req,res){
-    weatherAPI.getCurrentWeatherByCityId(2172797,function(err, body) {
+    waetherProvider.getCurrentWeatherByCityId(2172797,function(err, body) {
         if (err) {
             console.log(err);
         } else {
