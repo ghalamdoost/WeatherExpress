@@ -1,7 +1,7 @@
 const request = require('request');
+require('dotenv').config();
 
-const apiKey = '02caa31faf5a3d582a3f1145715b7d5f';
-const url='https://api.openweathermap.org/data/2.5/weather?appid=02caa31faf5a3d582a3f1145715b7d5f';
+const url='https://api.openweathermap.org/data/2.5/weather?appid='+process.env.API_KEY;
 
 
 function getCurrentWeatherByCityId(cityId,callback){
