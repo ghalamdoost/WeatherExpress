@@ -6,7 +6,7 @@ const url='https://api.openweathermap.org/data/2.5/weather?appid='+process.env.A
 
 function getCurrentWeatherByCityId(cityId,callback){
     request({
-        url: url+'&id='+cityId,
+        url: `${url}&id=${cityId}`,
         json: true
     }, function(error, response, body){
 
@@ -19,7 +19,7 @@ function getCurrentWeatherByCityId(cityId,callback){
 
 function getCurrentWeatherByLatLon(lat,lon,callback){
     request({
-        url: url+'&lat='+lat+'&lon='+lon,
+        url: `${url}&lat=${lat}&lon=${lon}`,
         json: true
     }, function(error, response, body){
 
@@ -32,7 +32,7 @@ function getCurrentWeatherByLatLon(lat,lon,callback){
 
 function getCurrentWeatherByName(name,callback){
     request({
-        url: url+'&q='+name,
+        url: `${url}&q=${name}`,
         json: true
     }, function(error, response, body){
 
