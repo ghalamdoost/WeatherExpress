@@ -1,25 +1,34 @@
 const waetherProvider = require('../app_server/services/waetherProvider');
-const weather = require('../app_server/controllers/weather')
+const weather = require('../app_server/controllers/weather');
+const city = require('../app_server/controllers/city');
 
 let obj;
 
 
 function syncWeather(){
-    
-    waetherProvider.getCurrentWeatherByName("Cairns",function(err, body) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(body);
-            obj=body;
-            weather.createOrUpdateWeather(obj, function(err,body){
-                if (err) {
-                    console.log(err);
-                }
+    city.getEverSearchedCityList(function(err,list){
+        if(list!=null){
+            list.forEach(function(city) {
+                waetherProvider.getCurrentWeatherByName(city._doc.name,function(err, body) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(body);
+                        obj=body;
+                        weather.createOrUpdateWeather(obj, function(err,body){
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
             });
         }
     });
+    
 }
+
+
 
 module.exports={
     syncWeather
