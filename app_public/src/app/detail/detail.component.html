@@ -1,1 +1,19 @@
-<p>detail works!</p>
+<br/>
+<div class="row col-7 justify-content-center">
+    <button (click)="cancel()" class="btn btn-secondary">Back</button>
+    <br/>
+</div>
+<div class="row justify-content-center">
+    <div class="col-3">
+        <p>{{weatherResult?.name}}</p>
+        <p>{{weatherResult?.weather_icon}}</p>
+        <p>{{weatherResult?.coord_lon}}</p>
+        <p>{{weatherResult?.coord_lat}}</p>
+        <p>{{weatherResult?.weather_id}}</p>
+        <p>{{weatherResult?.weather_main}}</p>
+        <p>{{weatherResult?.weather_description}}</p>
+        <p>{{weatherResult?.timezone}}</p>
+        <p>{{weatherResult?.objid}}</p>
+        <p>{{weatherResult?.cod}}</p>
+    </div>
+</div>
