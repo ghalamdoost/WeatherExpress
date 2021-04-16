@@ -8,13 +8,15 @@ import { MainWeatherComponent } from './main-weather/main-weather.component';
 import { RouterModule } from '@angular/router';
 import { DetailComponent } from './detail/detail.component';
 import { FormsModule } from '@angular/forms';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     MainWeatherComponent,
-    DetailComponent
+    DetailComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
