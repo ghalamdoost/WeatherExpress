@@ -16,8 +16,8 @@ const getEverSearchedCityList=function(res){
         })
 }
 
-const getCityBynameAndCountry=function(wname,wcountry,res){
-    Cit.find({name:wname,country:wcountry})
+const getCityBynameAndCountry=function(wunits,wname,wcountry,res){
+    Cit.find({name:wname,country:wcountry,units:wunits})
         .exec(function(err,city){
             if(!city || city.length==0){
                 res("city not found",null);
@@ -29,11 +29,11 @@ const getCityBynameAndCountry=function(wname,wcountry,res){
         })
 }
 
-const checkCityExistOrAdd=function(wname,wcountry,res){
-    if(wname!=null && wcountry!=null){
-        getCityBynameAndCountry(wname,wcountry,function(err,city){
+const checkCityExistOrAdd=function(units,wname,wcountry,res){
+    if(units!=null && wname!=null && wcountry!=null){
+        getCityBynameAndCountry(units,wname,wcountry,function(err,city){
             if(!city || err){
-                createCity(wname,wcountry,function(err,docs){
+                createCity(units,wname,wcountry,function(err,docs){
                     if(!err){
                         res(false, docs);
                     }else{
@@ -47,7 +47,7 @@ const checkCityExistOrAdd=function(wname,wcountry,res){
     }
 }
 
-const createCity=function(wname,wcountry,callback){
+const createCity=function(wunits,wname,wcountry,callback){
     weatherProvider.getWorldCityList(function(err,list){
         var result;
         if(wname!=null && wcountry!=null){            
@@ -69,6 +69,7 @@ const createCity=function(wname,wcountry,callback){
             Cit.create({
                 country: city[0].country,
                 name: city[0].name,
+                units:wunits
             },(err, cdata) => {
                 if(err){
                     callback(err,null);

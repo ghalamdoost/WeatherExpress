@@ -5,9 +5,9 @@ const cities = require('all-the-cities');
 
 const url='https://api.openweathermap.org/data/2.5/weather?appid='+process.env.API_KEY;
 
-function getCurrentWeatherByNameAndCountry(wname,wcountry,callback){
+function getCurrentWeatherByNameAndCountry(units,wname,wcountry,callback){
     request({
-        url: `${url}&q=${wname},${wcountry}`,
+        url: `${url}&q=${wname},${wcountry}&units=${units}`,
         json: true
     }, function(error, response, body){
 

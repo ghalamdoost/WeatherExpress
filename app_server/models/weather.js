@@ -29,7 +29,8 @@ const WeatherSchema = mongoose.Schema({
     name: String,
     objid: Number,
     cod: Number,
-    country:String
+    country:String,
+    units:String
 });
 
 module.exports = mongoose.model('Weather', WeatherSchema);

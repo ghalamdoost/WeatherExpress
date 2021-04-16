@@ -2,7 +2,7 @@ const appServer = require('../../app_server/controllers/weather');
 
 
 const getCurrentWeatherByNameAndCountry=function(req,res){
-    appServer.getCurrentWeatherByNameAndCountry(req.params.wname,req.params.wcountry,function(err,weather){
+    appServer.getCurrentWeatherByNameAndCountry(req.params.units,req.params.wname,req.params.wcountry,function(err,weather){
         if(err){
             res.status(404).json(err);
         }else{
