@@ -8,6 +8,13 @@ const getEverSearchedCityList =function(req,res){
     })
 }
 
+const getWorldCityList = function(req,res){
+    appServer.getWorldCityList(function(err,callback){
+        res.status(200).json(callback);
+    })
+}
+
 module.exports = {
-    getEverSearchedCityList
+    getEverSearchedCityList,
+    getWorldCityList
 }

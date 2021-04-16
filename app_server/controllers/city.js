@@ -16,6 +16,12 @@ const getEverSearchedCityList=function(res){
         })
 }
 
+const getWorldCityList=function(res){
+    weatherProvider.getWorldCityList(function(err,list){        
+            res(null,list)
+    })
+}
+
 const getCityBynameAndCountry=function(wunits,wname,wcountry,res){
     Cit.find({name:wname,country:wcountry,units:wunits})
         .exec(function(err,city){
@@ -86,5 +92,6 @@ const createCity=function(wunits,wname,wcountry,callback){
 
 module.exports = {
     getEverSearchedCityList,
-    checkCityExistOrAdd
+    checkCityExistOrAdd,
+    getWorldCityList
 }
