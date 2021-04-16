@@ -6,18 +6,7 @@ const index = function(req, res){
 };
 
 
-const stest= function(req,res){
-    waetherProvider.getCurrentWeatherByCityId(2172797,function(err, body) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(body);
-        }
-    });
-}
-
 
 module.exports = {
-    index,
-    stest
+    index
 };

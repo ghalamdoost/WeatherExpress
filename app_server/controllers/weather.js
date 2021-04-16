@@ -87,7 +87,7 @@ const createOrUpdateWeather = function(obj,res){
 
 const getCurrentWeatherByNameAndCountry=function(wname,wcountry,response){
     //check if there is any city stored in the database with the same id and name; if not, add it, if it was added, simply bypass.
-    checkCityExistOrAdd(wname,wcountry,null,null,function(err,callback){
+    checkCityExistOrAdd(wname,wcountry,function(err,callback){
         //check if err == false or true , then add weather or no
         if(!err){            
             createWeather(callback,wcountry,function(err,res){
@@ -109,8 +109,8 @@ const getCurrentWeatherByNameAndCountry=function(wname,wcountry,response){
     
 }
 
-const checkCityExistOrAdd=function(wname,wcountry,wlat,wlon,res){
-    city.checkCityExistOrAdd(wname,wcountry,wlat,wlon,function(err,callback){
+const checkCityExistOrAdd=function(wname,wcountry,res){
+    city.checkCityExistOrAdd(wname,wcountry,function(err,callback){
         res(err,callback);
     })
 }

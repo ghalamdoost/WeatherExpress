@@ -29,21 +29,11 @@ const getCityBynameAndCountry=function(wname,wcountry,res){
         })
 }
 
-const checkCityExistOrAdd=function(wname,wcountry,wlat,wlon,res){
-    if(wname==null && wcountry==null){
-        getCityByLatLon(wlat,wlon,function(err,city){
-            if(!city || err){
-                createCity(null,null,wlat,wlon,function(err, docs){
-                    res(err, docs);
-                });
-            }else{
-                res(true,city);
-            }
-        })
-    }else if(wlat==null && wlon==null){
+const checkCityExistOrAdd=function(wname,wcountry,res){
+    if(wname!=null && wcountry!=null){
         getCityBynameAndCountry(wname,wcountry,function(err,city){
             if(!city || err){
-                createCity(wname,wcountry,null,null,function(err,docs){
+                createCity(wname,wcountry,function(err,docs){
                     if(!err){
                         res(false, docs);
                     }else{
@@ -57,13 +47,10 @@ const checkCityExistOrAdd=function(wname,wcountry,wlat,wlon,res){
     }
 }
 
-const createCity=function(wname,wcountry,wlat,wlon,callback){
+const createCity=function(wname,wcountry,callback){
     weatherProvider.getWorldCityList(function(err,list){
         var result;
-        if(wname==null && wcountry==null){
-            result=list.filter(x=>x.coord_lon===wlon&&x.coord_lat===wlat);
-        }else if(wlat==null && wlon==null){
-            
+        if(wname!=null && wcountry!=null){            
             result=list.filter(city => city.name.match(wname) && city.country.match(wcountry));
             if(result.length>1){
                 result=result.filter(x=>x.name===wname && x.country===wcountry);            
