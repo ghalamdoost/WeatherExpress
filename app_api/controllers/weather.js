@@ -1,17 +1,8 @@
 const appServer = require('../../app_server/controllers/weather');
 
-const getCurrentWeatherByLatLon=function(req,res){
-    appServer.getCurrentWeatherByLatLon(req.params.wlat,req.params.wlon,function(err,weather){
-        if(err){
-            res.status(404).json(err);
-        }else{
-            res.status(200).json(weather);
-        }
-    });
-}
 
-const getCurrentWeatherByName=function(req,res){
-    appServer.getCurrentWeatherByName(req.params.wname,function(err,weather){
+const getCurrentWeatherByNameAndCountry=function(req,res){
+    appServer.getCurrentWeatherByNameAndCountry(req.params.wname,req.params.wcountry,function(err,weather){
         if(err){
             res.status(404).json(err);
         }else{
@@ -22,6 +13,5 @@ const getCurrentWeatherByName=function(req,res){
 
 
 module.exports = {
-    getCurrentWeatherByLatLon,
-    getCurrentWeatherByName
+    getCurrentWeatherByNameAndCountry
 }

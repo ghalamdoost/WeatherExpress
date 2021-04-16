@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const dbURI = 'mongodb+srv://mongoUser:mongoPassword@cluster0.ovfkx.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose.connect(dbURI, {

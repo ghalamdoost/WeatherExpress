@@ -5,8 +5,8 @@ var cronTask=require('./cronTask');
   
 app = express(); // Initializing app
   
-// Creating a cron job which runs on every 10 second
-cron.schedule("*/10 * * * * *", function() {
+// Creating a cron job which runs on every 1 hour
+cron.schedule("0 * * * *", function() {
     cronTask.syncWeather();
 });
   

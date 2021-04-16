@@ -9,7 +9,7 @@ function syncWeather(){
     city.getEverSearchedCityList(function(err,list){
         if(list!=null){
             list.forEach(function(city) {
-                waetherProvider.getCurrentWeatherByName(city._doc.name,function(err, body) {
+                waetherProvider.getCurrentWeatherByNameAndCountry(city._doc.name,city._doc.country,function(err, body) {
                     if (err) {
                         console.log(err);
                     } else {

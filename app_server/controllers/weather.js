@@ -3,7 +3,7 @@ const Wea = mongoose.model('Weather');
 const city = require('./city');
 const weatherProvider = require('../services/waetherProvider');
 
-const createWeather=function(obj,callback){
+const createWeather=function(obj,wcountry,callback){
     if(obj.weather && obj.weather.length>0){
         Wea.create({
             coord_lon: obj.coord.lon,
@@ -12,7 +12,8 @@ const createWeather=function(obj,callback){
             timezone: obj.timezone,
             objid: obj.id,
             name: obj.name,
-            cod: obj.cod
+            cod: obj.cod,
+            country:wcountry
         },(err, wdata) => {
             if(err){
                 callback(err,null);
@@ -22,7 +23,7 @@ const createWeather=function(obj,callback){
         }); 
     }else{
         //call api to get weather data, and store it in db
-        weatherProvider.getCurrentWeatherByCityId(obj.objid,function(err,result){
+        weatherProvider.getCurrentWeatherByNameAndCountry(obj.name,wcountry,function(err,result){
             var s= result;
 
             Wea.create({
@@ -32,7 +33,8 @@ const createWeather=function(obj,callback){
                 timezone: result.timezone,
                 objid: result.id,
                 name: result.name,
-                cod: result.cod
+                cod: result.cod,
+                country:wcountry
             },(err, wdata) => {
                 if(err){
                     callback(err,null);
@@ -83,29 +85,16 @@ const createOrUpdateWeather = function(obj,res){
         });
 }
 
-const getCurrentWeatherByLatLon=function(wlat,wlon,res){
-    Wea.find({coord_lat:wlat, coord_lon:wlon})
-        .exec((err,weather)=>{
-            if(!weather){
-                res("weather not found",null);
-            }else if (err) {
-                res(JSON.stringify(err),null);
-            }else{
-                res(null, weather);
-            }
-        })
-}
-
-const getCurrentWeatherByName=function(wname,response){
+const getCurrentWeatherByNameAndCountry=function(wname,wcountry,response){
     //check if there is any city stored in the database with the same id and name; if not, add it, if it was added, simply bypass.
-    checkCityExist(wname,null,null,function(err,callback){
+    checkCityExistOrAdd(wname,wcountry,null,null,function(err,callback){
         //check if err == false or true , then add weather or no
         if(!err){            
-            createWeather(callback,function(err,res){
+            createWeather(callback,wcountry,function(err,res){
                 response(null,res);
             })
         }else{
-            Wea.find({name:wname})
+            Wea.find({name:wname,country:wcountry})
                 .exec((err,weather)=>{
                     if(!weather){
                         response("weather not found",null);
@@ -120,14 +109,13 @@ const getCurrentWeatherByName=function(wname,response){
     
 }
 
-const checkCityExist=function(wname,wlat,wlon,res){
-    city.checkCityExist(wname,wlat,wlon,function(err,callback){
+const checkCityExistOrAdd=function(wname,wcountry,wlat,wlon,res){
+    city.checkCityExistOrAdd(wname,wcountry,wlat,wlon,function(err,callback){
         res(err,callback);
     })
 }
 
 module.exports = {
     createOrUpdateWeather,
-    getCurrentWeatherByLatLon,
-    getCurrentWeatherByName
+    getCurrentWeatherByNameAndCountry
 }

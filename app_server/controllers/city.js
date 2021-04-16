@@ -16,10 +16,10 @@ const getEverSearchedCityList=function(res){
         })
 }
 
-const getCityById=function(id,res){
-    Cit.find({objid:id})
-        .exec((err,city)=>{
-            if(!city){
+const getCityBynameAndCountry=function(wname,wcountry,res){
+    Cit.find({name:wname,country:wcountry})
+        .exec(function(err,city){
+            if(!city || city.length==0){
                 res("city not found",null);
             }else if (err) {
                 res(JSON.stringify(err),null);
@@ -29,37 +29,11 @@ const getCityById=function(id,res){
         })
 }
 
-const getCityByname=function(name,res){
-    Cit.find({name:name})
-        .exec((err,cities)=>{
-            if(!cities.length>0){
-                res("city not found",null);
-            }else if (err) {
-                res(JSON.stringify(err),null);
-            }else{
-                res(null, cities);
-            }
-        })
-}
-
-const getCityByLatLon=function(lat,lon,res){
-    Cit.find({coord_lat:lat,coord_lon:res})
-        .exec((err,city)=>{
-            if(!city){
-                res("city not found",null);
-            }else if (err) {
-                res(JSON.stringify(err),null);
-            }else{
-                res(null, city);
-            }
-        })
-}
-
-const checkCityExist=function(wname,wlat,wlon,res){
-    if(wname==null){
+const checkCityExistOrAdd=function(wname,wcountry,wlat,wlon,res){
+    if(wname==null && wcountry==null){
         getCityByLatLon(wlat,wlon,function(err,city){
             if(!city || err){
-                createCity(null,wlat,wlon,function(err, docs){
+                createCity(null,null,wlat,wlon,function(err, docs){
                     res(err, docs);
                 });
             }else{
@@ -67,11 +41,11 @@ const checkCityExist=function(wname,wlat,wlon,res){
             }
         })
     }else if(wlat==null && wlon==null){
-        getCityByname(wname,function(err,city){
+        getCityBynameAndCountry(wname,wcountry,function(err,city){
             if(!city || err){
-                createCity(wname,null,null,function(err,docs){
+                createCity(wname,wcountry,null,null,function(err,docs){
                     if(!err){
-                        res(null, docs._doc);
+                        res(false, docs);
                     }else{
                         res(err,null)
                     }
@@ -82,14 +56,18 @@ const checkCityExist=function(wname,wlat,wlon,res){
         })
     }
 }
-//implement create city
-const createCity=function(wname,wlat,wlon,callback){
+
+const createCity=function(wname,wcountry,wlat,wlon,callback){
     weatherProvider.getWorldCityList(function(err,list){
         var result;
-        if(wname==null){
+        if(wname==null && wcountry==null){
             result=list.filter(x=>x.coord_lon===wlon&&x.coord_lat===wlat);
         }else if(wlat==null && wlon==null){
-            result=list.filter(x=>x.name===wname);
+            
+            result=list.filter(city => city.name.match(wname) && city.country.match(wcountry));
+            if(result.length>1){
+                result=result.filter(x=>x.name===wname && x.country===wcountry);            
+            }
         }
         var city=result.reduce((acc, current) => {
             const x = acc.find(item => item.name === current.name && item.country === current.country);
@@ -99,37 +77,26 @@ const createCity=function(wname,wlat,wlon,callback){
               return acc;
             }
         }, []);
+
         if(city && city.length>0){
             Cit.create({
-                coord_lon: city[0].coord.lon,
-                coord_lat: city[0].coord.lat,
                 country: city[0].country,
-                state: city[0].state,
-                objid: city[0].id,
                 name: city[0].name,
             },(err, cdata) => {
                 if(err){
                     callback(err,null);
                 }else{
-                    callback(null,cdata);
+                    callback(null,cdata._doc);
                 }
             });
         }else{
             callback("no data",null);
-        }
-
-
-          
-        
-        
+        }        
     })
 }
 
 
 module.exports = {
     getEverSearchedCityList,
-    getCityById,
-    getCityByname,
-    getCityByLatLon,
-    checkCityExist
+    checkCityExistOrAdd
 }

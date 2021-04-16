@@ -28,9 +28,8 @@ const WeatherSchema = mongoose.Schema({
     timezone: Number,
     name: String,
     objid: Number,
-    cod: Number
+    cod: Number,
+    country:String
 });
 
-
-//Clarify with the TEAM: WeatherSchema.index({coords: '2dsphere'});
 module.exports = mongoose.model('Weather', WeatherSchema);
