@@ -9,10 +9,25 @@ const createWeather=function(wunits,obj,wcountry,callback){
             coord_lon: obj.coord.lon,
             coord_lat: obj.coord.lat,
             weather_id: obj.weather[0].id,
+            weather_main: obj.weather[0].main,
+            weather_description: obj.weather[0].description,
+            weather_icon: obj.weather[0].icon,
             timezone: obj.timezone,
+            base: obj.base,
+            main_temp: obj.main.temp,
+            main_feels_like: obj.main.temp,
+            main_temp_min: obj.main.temp_min,
+            main_temp_max: obj.main.temp_max,
+            main_pressure: obj.main.pressure,
+            main_humidity: obj.main.humidity,
+            visibility: obj.visibility,
+            sys_sunrise: obj.sys.sunrise,
+            sys_sunset: obj.sys.sunset,
             objid: obj.id,
             name: obj.name,
             cod: obj.cod,
+            wind_deg: result.wind.deg,
+            wind_speed: result.wind.speed,
             country:wcountry,
             units:wunits
         },(err, wdata) => {
@@ -31,10 +46,25 @@ const createWeather=function(wunits,obj,wcountry,callback){
                 coord_lon: result.coord.lon,
                 coord_lat: result.coord.lat,
                 weather_id: result.weather[0].id,
+                weather_main: result.weather[0].main,
+                weather_description: result.weather[0].description,
+                weather_icon: result.weather[0].icon,
                 timezone: result.timezone,
+                base: result.base,
+                main_temp: result.main.temp,
+                main_feels_like: result.main.temp,
+                main_temp_min: result.main.temp_min,
+                main_temp_max: result.main.temp_max,
+                main_pressure: result.main.pressure,
+                main_humidity: result.main.humidity,
+                visibility: result.visibility,
+                sys_sunrise: result.sys.sunrise,
+                sys_sunset: result.sys.sunset,
                 objid: result.id,
                 name: result.name,
                 cod: result.cod,
+                wind_deg: result.wind.deg,
+                wind_speed: result.wind.speed,
                 country:wcountry,
                 units:wunits
             },(err, wdata) => {
@@ -72,10 +102,25 @@ const createOrUpdateWeather = function(wunits,obj,res){
                 weather[0].coord_lon= obj.coord.lon;
                 weather[0].coord_lat= obj.coord.lat;
                 weather[0].weather_id= obj.weather[0].id;
+                weather[0].weather_main= obj.weather[0].main,
+                weather[0].weather_description= obj.weather[0].description,
+                weather[0].weather_icon= obj.weather[0].icon,
                 weather[0].timezone= obj.timezone;
+                weather[0].base=obj.base;
+                weather[0].main_temp=obj.main.temp;
+                weather[0].main_feels_like=obj.main.temp;
+                weather[0].main_temp_min=obj.main.temp_min;
+                weather[0].main_temp_max=obj.main.temp_max;
+                weather[0].main_pressure=obj.main.pressure;
+                weather[0].main_humidity=obj.main.humidity;
+                weather[0].visibility=obj.visibility;
+                weather[0].sys_sunrise=obj.sys.sunrise;
+                weather[0].sys_sunset=obj.sys.sunset;
                 weather[0].objid= obj.id;
                 weather[0].name= obj.name;
                 weather[0].cod= obj.cod;
+                weather[0].wind_speed=obj.wind.speed;
+                weather[0].wind_deg=obj.wind.deg;
                 weather[0].units=wunits;
                 weather[0].save((err, weather) => {
                     if (err) {
