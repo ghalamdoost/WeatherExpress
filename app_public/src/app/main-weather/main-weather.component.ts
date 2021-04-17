@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import cities from '../../assets/cities.json';
+
 
 @Component({
   selector: 'app-main-weather',
@@ -12,8 +14,9 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class MainWeatherComponent implements OnInit {
   //Variables
+  
   public name : String = "";
-  public citiesResult = [{
+  public citiesResult = [];/*[{
                             cityId: '5454711',
                             name: 'London',
                             country: 'CA',
@@ -43,9 +46,9 @@ export class MainWeatherComponent implements OnInit {
                               type: 'Point',
                               coordinates: [-106.6428, 35.16199]
                             }
-                          }];
+                          }];*/
   public myControl = new FormControl();
-  public options: string[] = [];
+  public options : string[] = [];
   public filteredOptions: Observable<string[]>;
 
 
@@ -56,10 +59,11 @@ export class MainWeatherComponent implements OnInit {
 
   ngOnInit(): void {
     //Made API cities result readable
-    this.citiesResult.forEach(e => {
-      this.options.push(e.name+", "+e.country);
-    });
-    
+    for(var i in cities){
+      this.options.push(cities[i].name+', '+cities[i].country);
+    }
+    this.options.sort();
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -68,7 +72,7 @@ export class MainWeatherComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.options.filter(d => d.toLowerCase().indexOf(filterValue) === 0);
+    return this.options.filter(d => d.toLowerCase().indexOf(filterValue) === 0).slice(0,10);
   }
 
   constructor(private route: Router) { }

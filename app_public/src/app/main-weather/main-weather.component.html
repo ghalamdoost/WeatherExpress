@@ -10,7 +10,8 @@
                        matInput
                        [formControl]="myControl"
                        [matAutocomplete]="auto"
-                       required> 
+                       required
+                       size="300"> 
                 <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                     {{option}}
