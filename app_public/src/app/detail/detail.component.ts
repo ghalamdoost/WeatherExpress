@@ -20,7 +20,10 @@ export class DetailComponent implements OnInit {
 
   private getWeather() : void {
     const name = this.route.snapshot.paramMap.get('name');
-    this.weatherService.getWeatherByName(name).then(foundItem => this.weatherResult = foundItem);     
+    const country = this.route.snapshot.paramMap.get('country');
+    const unit = this.route.snapshot.paramMap.get('unit');
+    this.weatherService.getWeather(name,country,unit).then(foundItem => this.weatherResult = foundItem);  
+    console.log(this.weatherResult);
   }
 
   public cancel() : void {

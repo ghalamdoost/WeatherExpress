@@ -1,24 +1,14 @@
 
-<div class="row justify-content-center" style="height: 100%; background-image: url('assets/img/background.jpg');">
-        <form (ngSubmit)="findWeather()" name="findweather" #itemForm="ngForm">
-            <!--<input [(ngModel)]="name" name="name" id="cityname" required placeholder="City Name" required>-->
-            <mat-form-field class="example-full-width">
-                <mat-label>City Name</mat-label>
-                <input type="text"
-                       placeholder="City Name"
-                       aria-label="City Name"
-                       matInput
-                       [formControl]="myControl"
-                       [matAutocomplete]="auto"
-                       required
-                       size="300"> 
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                    {{option}}
-                  </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-            <button class="btn btn-primary" [disabled]="!itemForm.form.valid">Find Weather</button>
-        </form>        
-   
+<div class="mainweather row justify-content-center">
+    <form (ngSubmit)="findWeather()" name="findweather" #itemForm="ngForm">
+        <input type="text" id="name" name="name" [formControl]="myControl" placeholder="City Name" (input)="suggest()" required>        
+        <select [formControl]="unitControl" name="units" id="units">
+          <option value="metric" selected="selected">°C</option>
+          <option value="imperial">°F</option>
+        </select>
+        <button type="submit" class="btn btn-primary" [disabled]="!itemForm.form.valid">Find Weather</button>                       
+        <div class="filteredOptions" *ngIf="filteredOptions.length">
+          <div (click)="updateInput([s])" *ngFor="let s of filteredOptions">{{s}}</div>
+        </div>
+    </form>    
 </div>

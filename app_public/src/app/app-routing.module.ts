@@ -15,7 +15,7 @@ const routes: Routes = [
     component: MainWeatherComponent
   },
   {
-    path: 'detail/:name',
+    path: 'detail/:name/:country/:unit',
     component: DetailComponent
   },
   {

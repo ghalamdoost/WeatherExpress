@@ -9,8 +9,8 @@ export class WeatherDataService {
   private apiBaseURL = 'http://localhost:3000/api';
 
   //getWeatherByName
-  public getWeatherByName(name) : Promise<WeatherSchema>{
-    const url : string = `${this.apiBaseURL}/weathers/name/${name}`;
+  public getWeather(name,country,unit) : Promise<WeatherSchema>{
+    const url : string = `${this.apiBaseURL}/weathers/${unit}/${name}/${country}`;
     return this.http.get(url).toPromise().then(response => response as WeatherSchema).catch(this.handleError);
   }
 

@@ -10,9 +10,7 @@ import { DetailComponent } from './detail/detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatAutocompleteModule} from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,15 +23,13 @@ import { MatInputModule } from '@angular/material/input';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    BrowserAnimationsModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
+    BrowserAnimationsModule,    
     FormsModule,
-    ReactiveFormsModule,
-    MatInputModule 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

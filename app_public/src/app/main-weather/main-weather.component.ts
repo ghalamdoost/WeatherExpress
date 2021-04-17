@@ -6,55 +6,28 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import cities from '../../assets/cities.json';
 
-
 @Component({
   selector: 'app-main-weather',
   templateUrl: './main-weather.component.html',
   styleUrls: ['./main-weather.component.css']
 })
 export class MainWeatherComponent implements OnInit {
-  //Variables
-  
-  public name : String = "";
-  public citiesResult = [];/*[{
-                            cityId: '5454711',
-                            name: 'London',
-                            country: 'CA',
-                            altCountry: '',
-                            muni: '',
-                            muniSub: '',
-                            featureClass: 'P',
-                            featureCode: 'PPLA2',
-                            adminCode: 'NM',
-                            population: 545852,
-                            loc: {
-                              type: 'Point',
-                              coordinates: [-106.65114, 35.084] 
-                            }
-                          }, {
-                            cityId: '5476960',
-                            name: 'Toronto',
-                            country: 'CA',
-                            altCountry: '',
-                            muni: '',
-                            muniSub: '',
-                            featureClass: 'P',
-                            featureCode: 'PPL',
-                            adminCode: 'NM',
-                            population: 6024,
-                            loc: {
-                              type: 'Point',
-                              coordinates: [-106.6428, 35.16199]
-                            }
-                          }];*/
+  //Variables  
   public myControl = new FormControl();
+  public unitControl = new FormControl();
   public options : string[] = [];
-  public filteredOptions: Observable<string[]>;
+  public filteredOptions : string[] = [];
+  public 
 
 
   public findWeather(): void{
-    var name = this.myControl.value;
-    this.route.navigate(['/detail/'+name]);
+    //Dont forget to validate here
+    //
+    var nameCountry = this.myControl.value.toString().split(', ');
+    var name = encodeURI(nameCountry[0]);
+    var unit = this.unitControl.value;
+    var country = nameCountry[1];
+    this.route.navigate(['/detail/'+name+'/'+country+'/'+unit]);
   }  
 
   ngOnInit(): void {
@@ -63,16 +36,17 @@ export class MainWeatherComponent implements OnInit {
       this.options.push(cities[i].name+', '+cities[i].country);
     }
     this.options.sort();
+    //Default unit value
+    this.unitControl.setValue('metric');
+  } 
 
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
-  }
+  public suggest() {
+    const filterValue = this.myControl.value.toLowerCase();
+    this.filteredOptions = this.options.filter(c => c.toLowerCase().startsWith(filterValue)).slice(0, 5);
+  } 
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.options.filter(d => d.toLowerCase().indexOf(filterValue) === 0).slice(0,10);
+  public updateInput(value : string){
+    this.myControl.setValue(value);    
   }
 
   constructor(private route: Router) { }
