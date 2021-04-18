@@ -1,19 +1,19 @@
 .mainweather{
-    height: 250px;
+    height: 430px;
     background-image: url('/assets/img/background.jpg');
-    padding-top: 30px;
+    padding-top: 50px;
 }
 
 .filteredOptions{
-    /*position: absolute;*/
+    position: absolute;
     border: 1px solid #d4d4d4;
     border-bottom: none;
     border-top: none;
     z-index: 99;
     /*position the autocomplete items to be the same width as the container:*/
-    top: 100%;
+    /*top: 100%;
     left: 0;
-    right: 0;
+    right: 0;*/
 }
 
 .filteredOptions div {

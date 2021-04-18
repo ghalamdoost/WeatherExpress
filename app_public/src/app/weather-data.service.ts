@@ -7,11 +7,11 @@ import { WeatherSchema } from './weather';
 })
 export class WeatherDataService {
   private apiBaseURL = 'http://localhost:3000/api';
-
+  public math = Math;
   //getWeatherByName
   public getWeather(name,country,unit) : Promise<WeatherSchema>{
     const url : string = `${this.apiBaseURL}/weathers/${unit}/${name}/${country}`;
-    return this.http.get(url).toPromise().then(response => response as WeatherSchema).catch(this.handleError);
+    return this.http.get(url).toPromise().then(response => response[0] as WeatherSchema).catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any>{

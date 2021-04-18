@@ -17,14 +17,27 @@ export class MainWeatherComponent implements OnInit {
   public unitControl = new FormControl();
   public options : string[] = [];
   public filteredOptions : string[] = [];
-  public 
+  public alertMessage = "";
 
 
   public findWeather(): void{
-    //Dont forget to validate here
-    //
-    var nameCountry = this.myControl.value.toString().split(', ');
-    var name = encodeURI(nameCountry[0]);
+    var inputValue = this.myControl.value;
+    //Required validation
+    if(!inputValue){
+      this.alertMessage ="The City Name is required";
+      return;
+    }
+    //Validate if the city entered is on the list
+    if(!this.options.filter(c => c.toLowerCase() == inputValue.toString().toLowerCase()).length){
+      this.alertMessage = "The city name is not on the list"; 
+      return;
+    }
+    var nameCountry = inputValue.toString().split(', ');
+    //Normalize the string to avoid special characters on the city name (ex. Bogotá - Bogota)
+    var name = nameCountry[0];    
+
+    name = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    name = encodeURI(name);    
     var unit = this.unitControl.value;
     var country = nameCountry[1];
     this.route.navigate(['/detail/'+name+'/'+country+'/'+unit]);
@@ -42,11 +55,17 @@ export class MainWeatherComponent implements OnInit {
 
   public suggest() {
     const filterValue = this.myControl.value.toLowerCase();
-    this.filteredOptions = this.options.filter(c => c.toLowerCase().startsWith(filterValue)).slice(0, 5);
+    if(filterValue){
+      this.filteredOptions = this.options.filter(c => c.toLowerCase().startsWith(filterValue)).slice(0, 5);
+    }else{
+      this.filteredOptions =  [];
+    }
   } 
 
   public updateInput(value : string){
     this.myControl.setValue(value);    
+    //puts the list empty to hide the div
+    this.filteredOptions = [];
   }
 
   constructor(private route: Router) { }
