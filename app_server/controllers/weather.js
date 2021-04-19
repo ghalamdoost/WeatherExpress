@@ -6,8 +6,8 @@ const weatherProvider = require('../services/waetherProvider');
 const createWeather=function(wunits,obj,wcountry,callback){
     if(obj.weather && obj.weather.length>0){
         Wea.create({
-            coord_lon: obj.coord.lon,
-            coord_lat: obj.coord.lat,
+            /*coord_lon: obj.coord.lon,
+            coord_lat: obj.coord.lat,*/
             weather_id: obj.weather[0].id,
             weather_main: obj.weather[0].main,
             weather_description: obj.weather[0].description,
@@ -43,8 +43,8 @@ const createWeather=function(wunits,obj,wcountry,callback){
             var s= result;
 
             Wea.create({
-                coord_lon: result.coord.lon,
-                coord_lat: result.coord.lat,
+                /*coord_lon: result.coord.lon,
+                coord_lat: result.coord.lat,*/
                 weather_id: result.weather[0].id,
                 weather_main: result.weather[0].main,
                 weather_description: result.weather[0].description,
@@ -99,8 +99,8 @@ const createOrUpdateWeather = function(wunits,obj,res){
             } else if (err) {
                 res(JSON.stringify(err),null);                 
             }else{
-                weather[0].coord_lon= obj.coord.lon;
-                weather[0].coord_lat= obj.coord.lat;
+                /*weather[0].coord_lon= obj.coord.lon;
+                weather[0].coord_lat= obj.coord.lat;*/
                 weather[0].weather_id= obj.weather[0].id;
                 weather[0].weather_main= obj.weather[0].main,
                 weather[0].weather_description= obj.weather[0].description,

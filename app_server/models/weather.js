@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const WeatherSchema = mongoose.Schema({
-    coord_lon: Number,
-    coord_lat: Number,
+    /*coord_lon: Number,
+    coord_lat: Number,*/
     weather_id: Number,
     weather_main: String,
     weather_description: String,
