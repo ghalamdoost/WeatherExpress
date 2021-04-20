@@ -6,7 +6,7 @@
           <div class="filteredOptions"  *ngIf="filteredOptions.length">
             <div (click)="updateInput([s])" *ngFor="let s of filteredOptions">{{s}}</div>
           </div>    
-          <select [formControl]="unitControl" name="units" id="units">
+          <select [formControl]="unitControl" class="sel" name="units" id="units">
             <option value="metric" selected="selected">°C</option>
             <option value="imperial">°F</option>
           </select>

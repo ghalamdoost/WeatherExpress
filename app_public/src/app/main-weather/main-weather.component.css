@@ -27,3 +27,7 @@
   .filteredOptions div:hover {
     background-color: #e9e9e9; 
   }
+
+  .sel{
+    height: 30px;
+  }
