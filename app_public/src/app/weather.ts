@@ -27,3 +27,10 @@ import {Component, OnInit} from '@angular/core';
     country:String;
     units:String;
   }
+
+  export class SearchedWeatherSchema{
+    _id: String;
+    country: String;
+    name: String;
+    units: String;
+  }

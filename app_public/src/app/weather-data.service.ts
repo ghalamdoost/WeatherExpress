@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { WeatherSchema } from './weather';
+import { SearchedWeatherSchema, WeatherSchema } from './weather';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -16,7 +16,12 @@ export class WeatherDataService {
   public getWeather(name,country,unit) : Observable<WeatherSchema>{
     const url : string = `${this.apiBaseURL}/weathers/${unit}/${name}/${country}`;
     //return this.http.get(url).toPromise().then(response => response[0] as WeatherSchema).catch(this.handleError);
-    return this.http.get<WeatherSchema>(url).pipe(catchError(this.handleError));
+    return this.http.get<WeatherSchema>(url).pipe(catchError(this.handleError));    
+  }
+
+  public getSearchedWeathers(): Observable<SearchedWeatherSchema[]>{
+    const url : string = `${this.apiBaseURL}/cities/searched`;
+    return this.http.get<SearchedWeatherSchema[]>(url).pipe(catchError(this.handleError));
   }
   
   private handleError(error: any): Promise<any>{

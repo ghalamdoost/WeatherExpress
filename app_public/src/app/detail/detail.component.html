@@ -1,11 +1,8 @@
+<app-main-weather></app-main-weather>
 <div class="mainDetail">
-    <div class="row col-7 justify-content-center">
-        <button (click)="cancel()" class="btn btn-secondary">Back</button>
-        <br/>
-    </div>
     <div class="row justify-content-center" *ngIf="weatherResult">
         <div class="info col-4">
-            <img class="img-fluid" src="http://openweathermap.org/img/wn/{{weatherResult?.weather_icon}}@2x.png">      
+            <img *ngIf="weatherResult.weather_icon" class="img-fluid" src="http://openweathermap.org/img/wn/{{weatherResult?.weather_icon}}@2x.png">      
             <div class='degrees'>{{weatherResult?.main_temp | number: '1.0-0'}}<sup>°{{weatherResult?.units=='metric' ? 'C' : 'F'}}</sup></div>
             <div class='ctyname'>{{weatherResult?.name}}<sup>{{weatherResult?.country}}</sup></div>
             <p>{{weatherResult?.weather_description}}</p>
@@ -15,7 +12,7 @@
     </div>
     <div class="row justify-content-center" *ngIf="!weatherResult">
         <div class="alert alert-danger" role="alert">
-          City not found
+          City information not available
         </div>
-      </div>
+    </div>
 </div>

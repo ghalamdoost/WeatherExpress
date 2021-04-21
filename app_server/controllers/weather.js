@@ -149,7 +149,7 @@ const getCurrentWeatherByNameAndCountry=function(wunits,wname,wcountry,response)
                     }else if (err) {
                         response(JSON.stringify(err),null);
                     }else{
-                        response(null, weather);
+                        response(null, weather[0]);//Added [0], the answer was an array
                     }
                 });
         }            

@@ -1,0 +1,22 @@
+<div class="row justify-content-center">
+    <div class="info col-4">
+        <h2>Last searches</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col">Name</th>   
+                    <th class="col">Country</th>   
+                    <th class="col">Units</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let searched of searchedWeathers?.slice().reverse()">
+                    <td><a href="/detail/{{searched.name}}/{{searched.country}}/{{searched.units}}">{{searched.name}}</a></td>                        
+                    <td>{{searched.country}}</td>    
+                    <td>{{searched.units}}</td>                 
+                </tr>                             
+            </tbody>            
+        </table>   
+        
+    </div>   
+</div>

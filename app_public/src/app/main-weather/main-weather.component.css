@@ -1,7 +1,6 @@
 .mainweather{
-    height: 430px;
-    background-image: url('/assets/img/background.jpg');
-    padding-top: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .filteredOptions{

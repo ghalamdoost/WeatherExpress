@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WeatherSchema } from '../weather';
+import { Observable } from 'rxjs';
+import { SearchedWeatherSchema, WeatherSchema } from '../weather';
 import { WeatherDataService } from '../weather-data.service';
 
 @Component({
@@ -11,22 +12,22 @@ import { WeatherDataService } from '../weather-data.service';
 export class DetailComponent implements OnInit {
 
   public weatherResult : WeatherSchema;
-
-  constructor(private weatherService: WeatherDataService, private route : ActivatedRoute, private router : Router) { }
-
-  ngOnInit(): void {
-    this.getWeather();
+  
+  constructor(private weatherService: WeatherDataService, private route : ActivatedRoute, private router : Router) { 
   }
 
-  private getWeather() {
+  ngOnInit() { 
+    this.getWeather();  
+  } 
+
+  private getWeather(){
     const name = this.route.snapshot.paramMap.get('name');
     const country = this.route.snapshot.paramMap.get('country');
     const unit = this.route.snapshot.paramMap.get('unit');
-    this.weatherService.getWeather(name,country,unit).subscribe(foundItem => this.weatherResult = foundItem);           
+    
+    if(name!=null || country!=null || unit!=null){
+      this.weatherService.getWeather(name,country,unit).subscribe(foundItem => { this.weatherResult = foundItem});   
+      console.log(this.weatherResult);           
+    }
   }
-
-  public cancel() : void {
-    this.router.navigate(['/main']);
-  }
-
 }
