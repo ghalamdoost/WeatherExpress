@@ -8,7 +8,7 @@ require('./app_server/models/db');
 require('./app_cron/cronSchedule');
 
 //Route to the weather app_server
-const indexRouter = require('./app_server/routes/index');
+// const indexRouter = require('./app_server/routes/index');
 //Route to the weather app_api
 var apiRouter = require('./app_api/routes/index');
 
@@ -35,6 +35,11 @@ app.use(express.static(path.join(__dirname,'app_public','build')));
 //removed pug access app.use('/', indexRouter);
 //address route to /api
 app.use('/api', apiRouter);
+
+app.get('*', function(req, res, next) {
+  res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
+  });
+  
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
