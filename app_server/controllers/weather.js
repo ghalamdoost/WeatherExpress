@@ -89,7 +89,7 @@ const createOrUpdateWeather = function(wunits,obj,res){
     Wea.find({name:obj.name, country:obj.country, units:wunits})
         .exec((err, weather) => {
             if (!weather || weather.length==0) {
-                createWeather(wunits,obj,function(err,body){
+                createWeather(wunits,obj,obj.country,function(err,body){
                     if(err){
                         res(err,null);
                     }else{
