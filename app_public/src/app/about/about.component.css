@@ -7,3 +7,21 @@
 strong{
     font-weight: bold;
 }
+
+a{
+    text-decoration: none;
+}
+
+.black, .alink, .alink:visited{
+    color: black;
+}
+
+.justified{
+    text-align: justify;
+}
+
+.center{
+    margin: auto;
+    width: 80%;
+}
+

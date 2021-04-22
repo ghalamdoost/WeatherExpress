@@ -21,3 +21,8 @@ a{
 td{
     color: white;
 }
+
+button.btn.btn-primary{
+    border-radius: 1.25rem;
+    background-color: darkorange;
+}

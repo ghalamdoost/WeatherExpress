@@ -30,3 +30,9 @@
   .sel{
     height: 30px;
   }
+
+  #search{
+    border-radius: .3rem;
+    width: 100%;
+    background-color: darkorange;
+  }

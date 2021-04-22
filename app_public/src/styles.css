@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-body {
-    background-image: url('/assets/img/background.jpg');
+/* body {    
+} */
+
+.contain{
+    background-image: url('/assets/img/back.jpg');
+    width: 1920px;
+    min-width: 50%;
+    max-width: 100%;
+    margin: auto;
+    height: 100vh;
+}
+
+.row.justify-content-center {
+    margin-right: 0;
+    margin-left: 0;
 }

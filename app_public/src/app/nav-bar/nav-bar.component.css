@@ -1,18 +1,23 @@
 .navbar{
     padding-top: 0px !important;
-    background-color: teal !important;
+    /* background-color: teal !important; */
+    background-color: #5783af !important;
     
 }
 .navbar a{
     color: whitesmoke;
 }
-.navbar-nav {
+/* .navbar-nav {
     margin: auto !important;
-}
+} */
 .navbar-nav a{
     color: whitesmoke !important;
 }
-.is-active{
 
-border-bottom: 6px solid black;
+.is-active{
+    border-bottom: 6px solid black;
+}
+
+.right{
+    justify-content: flex-end;
 }
