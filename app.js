@@ -31,7 +31,8 @@ app.use('/api',(req, res, next) => {
   next();
 });
 
-app.use('/', indexRouter);
+app.use(express.static(path.join(__dirname,'app_public','build')));
+//removed pug access app.use('/', indexRouter);
 //address route to /api
 app.use('/api', apiRouter);
 
