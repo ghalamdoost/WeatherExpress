@@ -11,7 +11,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let searched of searchedWeathers?.slice().reverse()">
-                    <td><a href="/detail/{{searched.name}}/{{searched.country}}/{{searched.units}}">{{searched.name}}</a></td>                        
+                    <td><button (click)="showDetail(searched)" class="btn btn-primary">{{searched.name}}</button></td> <!--href="/detail/{{searched.name}}/{{searched.country}}/{{searched.units}}"-->
                     <td>{{searched.country}}</td>    
                     <td>{{searched.units}}</td>                 
                 </tr>                             

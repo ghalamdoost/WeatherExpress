@@ -35,8 +35,8 @@ export class MainWeatherComponent implements OnInit {
     var nameCountry = inputValue.toString().split(', ');
     //Normalize the string to avoid special characters on the city name (ex. Bogotá - Bogota)
     var name = nameCountry[0];    
-
-    name = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        
+    //name = this.normalizeText(name);
     name = encodeURI(name);    
     var unit = this.unitControl.value;
     var country = nameCountry[1];
@@ -54,13 +54,20 @@ export class MainWeatherComponent implements OnInit {
   } 
 
   public suggest() {
-    const filterValue = this.myControl.value.toLowerCase();
+    //get the actual value and removes the special characters
+    const filterValue = this.normalizeText(this.myControl.value.toLowerCase());    
+    
     if(filterValue){
-      this.filteredOptions = this.options.filter(c => c.toLowerCase().startsWith(filterValue)).slice(0, 5);
+      this.filteredOptions = this.options.filter(c => this.normalizeText(c.toLowerCase()).startsWith(filterValue)).slice(0, 5);
     }else{
       this.filteredOptions =  [];
     }
   } 
+
+  //remove special characters from the string
+  normalizeText(txt : string) : string{
+    return txt.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
 
   public updateInput(value : string){
     this.myControl.setValue(value);    

@@ -7,7 +7,7 @@ const url='https://api.openweathermap.org/data/2.5/weather?appid='+process.env.A
 
 function getCurrentWeatherByNameAndCountry(units,wname,wcountry,callback){
     request({
-        url: `${url}&q=${wname},${wcountry}&units=${units}`,
+        url: encodeURI(`${url}&q=${wname},${wcountry}&units=${units}`),//Added EncodeURI to avoid problems with special characters
         json: true
     }, function(error, response, body){
 

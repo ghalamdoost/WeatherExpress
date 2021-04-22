@@ -21,13 +21,16 @@ export class DetailComponent implements OnInit {
   } 
 
   private getWeather(){
-    const name = this.route.snapshot.paramMap.get('name');
-    const country = this.route.snapshot.paramMap.get('country');
-    const unit = this.route.snapshot.paramMap.get('unit');
-    
-    if(name!=null || country!=null || unit!=null){
-      this.weatherService.getWeather(name,country,unit).subscribe(foundItem => { this.weatherResult = foundItem});   
-      console.log(this.weatherResult);           
-    }
+    //subscription to support param changes 
+    this.route.params.subscribe(params => {
+        const name = params['name'];
+        const country = params['country'];
+        const unit = params['unit'];  
+        
+        if(name!=null || country!=null || unit!=null){
+          this.weatherService.getWeather(name,country,unit).subscribe(foundItem => { this.weatherResult = foundItem});   
+          console.log(this.weatherResult);           
+        }
+    });    
   }
 }

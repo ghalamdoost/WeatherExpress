@@ -26,8 +26,8 @@ const createWeather=function(wunits,obj,wcountry,callback){
             objid: obj.id,
             name: obj.name,
             cod: obj.cod,
-            wind_deg: result.wind.deg,
-            wind_speed: result.wind.speed,
+            wind_deg: obj.wind.deg,
+            wind_speed: obj.wind.speed,
             country:wcountry,
             units:wunits
         },(err, wdata) => {
@@ -61,7 +61,7 @@ const createWeather=function(wunits,obj,wcountry,callback){
                 sys_sunrise: result.sys.sunrise,
                 sys_sunset: result.sys.sunset,
                 objid: result.id,
-                name: result.name,
+                name: obj.name,//result.name,//save the searched name, not the returned to avoid problems with search
                 cod: result.cod,
                 wind_deg: result.wind.deg,
                 wind_speed: result.wind.speed,
