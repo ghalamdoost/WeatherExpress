@@ -12,8 +12,8 @@ function syncWeather(){
                 waetherProvider.getCurrentWeatherByNameAndCountry(city._doc.units, city._doc.name, city._doc.country, function(err, body) {
                     if (err) {
                         console.log(err);
-                    } else {
-                        console.log(body);
+                    } else {                        
+                        console.log(body);                        
                         obj=body;
                         weather.createOrUpdateWeather(city._doc.units,obj, function(err,body){
                             if (err) {
