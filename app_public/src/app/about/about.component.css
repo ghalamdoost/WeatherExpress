@@ -13,8 +13,17 @@ a{
     text-decoration: none;
 }
 
-.black, .alink, .alink:visited{
-    color: black;
+.alink, .alink:visited{
+    color: darkorange;
+}
+
+.orange{
+    color: darkorange;
+    font-weight: bold;
+}
+
+tbody tr{
+    background-color: rgba(0,0,0,.15);
 }
 
 .justified{

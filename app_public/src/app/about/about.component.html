@@ -30,19 +30,19 @@
           <h2>Description</h2>
           <div class="justified">
             <p class="lead">
-              <span class="black">MongooseDB,</span> The WeatherExpress project, uses Cloud-hosted MongoDB service on Azure.
+              <span class="orange">MongooseDB,</span> The WeatherExpress project, uses Cloud-hosted MongoDB service on Azure.
             </p>
             <p class="lead">
-              <span class="black">App_Server,</span> The WeatherExpress project uses the benefits of layer-based design; The app_server layer is responsible to provide data from OpenWeatherMap API and do business over fetched data to provide information for upper layer that is App_API. On this layer, the logic has access to only the database layer and OpenWeatherMap API.
+              <span class="orange">App_Server,</span> The WeatherExpress project uses the benefits of layer-based design; The app_server layer is responsible to provide data from OpenWeatherMap API and do business over fetched data to provide information for upper layer that is App_API. On this layer, the logic has access to only the database layer and OpenWeatherMap API.
             </p>
             <p class="lead">
-              <span class="black">App_API,</span> is responsible to get the request from the APP_Public layer or any 3rd-party app in the future, and pass the request to the downer layer that is APP_Server to provide information for upper layer. On this layer, the logic has access to only the App_Server layer.
+              <span class="orange">App_API,</span> is responsible to get the request from the APP_Public layer or any 3rd-party app in the future, and pass the request to the downer layer that is APP_Server to provide information for upper layer. On this layer, the logic has access to only the App_Server layer.
             </p>
             <p class="lead">
-              <span class="black">App_Cron,</span> is a backend service task that runs every one hour to update the database based on the searched cities and update the weather from the OpenWeatherMap. (The reason to have the Cron Schedule is to prevent getting block because of the repeating calling the OpenWeatherMap API.) On this layer, the logic has access to only the App_Server layer.
+              <span class="orange">App_Cron,</span> is a backend service task that runs every one hour to update the database based on the searched cities and update the weather from the OpenWeatherMap. (The reason to have the Cron Schedule is to prevent getting block because of the repeating calling the OpenWeatherMap API.) On this layer, the logic has access to only the App_Server layer.
             </p>
             <p class="lead">
-              <span class="black">App_Public,</span> is responsible to interact with end user to get request and show the information back to the user.
+              <span class="orange">App_Public,</span> is responsible to interact with end user to get request and show the information back to the user.
             </p>
           </div>
         </div>
